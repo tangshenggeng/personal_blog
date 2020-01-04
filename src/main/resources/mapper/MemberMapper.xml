@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kpp.member.mapper.MemberMapper">
+
+    <!-- 开启二级缓存 -->
+    <!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> -->
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kpp.member.beans.Member">
+        <id column="member_id" property="memberId" />
+        <result column="m_ident" property="mIdent" />
+        <result column="m_nick" property="mNick" />
+        <result column="m_email" property="mEmail" />
+        <result column="m_password" property="mPassword" />
+        <result column="m_autograph" property="mAutograph" />
+        <result column="m_header" property="mHeader" />
+        <result column="m_integral" property="mIntegral" />
+        <result column="m_state" property="mState" />
+        <result column="create_time" property="createTime" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        member_id, m_ident, m_nick, m_email, m_password, m_autograph, m_header, m_integral, m_state, create_time, is_del
+    </sql>
+
+</mapper>
