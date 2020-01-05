@@ -345,8 +345,7 @@
 
 <%@ include file="/pages/common/footer.jsp"%>
 
-<script src="${PATH}/static/layui/layui.js"></script>
-<script src="${PATH}/static/js/jquery2.0-min.js"></script>
+<script src="${PATH}/static/layui/layui.all.js"></script>
 
 <script>
 

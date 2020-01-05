@@ -22,30 +22,26 @@
   <div class="fly-panel fly-panel-user" pad20>
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title">
-        <li class="layui-this">登入</li>
-        <li><a href="${PATH}/pages/reg.jsp">注册</a></li>
+        <li class="layui-this">后台登录</li>
       </ul>
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-            <form method="post" action="${PATH}/member/loginInto">
+            <form method="post" action="${PATH}/admin/loginInto">
               <div class="layui-form-item">
-                <label for="L_email" class="layui-form-label">邮箱</label>
+                <label for="L_email" class="layui-form-label">登录名</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="mEmail"  autocomplete="off" class="layui-input">
+                  <input type="text" id="L_email" name="adminName"  autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">密码</label>
                 <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="mPassword" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_pass" name="adminPassword" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <button class="layui-btn" type="submit">立即登录</button>
-                <span style="padding-left:20px;">
-                  <a href="${PATH}/pages/forget.jsp">忘记密码？</a>
-                </span>
               </div>
               <div class="layui-form-item fly-form-app">
                 <!-- <span>或者使用社交账号登入</span>

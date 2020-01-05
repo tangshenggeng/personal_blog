@@ -103,7 +103,7 @@
 
  <%@ include file="/pages/common/footer.jsp"%>
 
-<script src="${PATH}/static/layui/layui.js"></script>
+<script src="${PATH}/static/layui/layui.all.js"></script>
 <script>
 layui.use(['layer','form'], function(){
 	var layer = layui.layer,form=layui.form;

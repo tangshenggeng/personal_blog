@@ -18,7 +18,7 @@ import com.kpp.admin.service.AdminService;
  *  前端控制器
  * </p>
  *
- * @author 项育林帅哥
+ * @author KPP
  * @since 2019-12-01
  */
 @Controller

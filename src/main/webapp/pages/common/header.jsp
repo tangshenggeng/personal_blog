@@ -12,10 +12,10 @@
       <li class="layui-nav-item layui-this">
         <a href="#"><i class="iconfont icon-jiaoliu"></i>欢迎访问KPP博客</a>
       </li>
-      <!-- <li class="layui-nav-item">
-        <a href="../case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
       <li class="layui-nav-item">
+        <a href="${PATH}/pages/admin-login.jsp"><i class="iconfont icon-iconmingxinganli"></i>进入后台</a>
+      </li>
+     	<!--  <li class="layui-nav-item">
         <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
       </li> -->
     </ul>
@@ -25,17 +25,17 @@
 		<c:when test="${not empty sessionScope.name}">
 			<li class="layui-nav-item">
 		        <a class="fly-nav-avatar" href="javascript:;">
-		          <cite class="layui-hide-xs">贤心</cite>
+		          <cite class="layui-hide-xs">${sessionScope.name}</cite>
 		          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-		          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-		          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+		          <!-- <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i> -->
+		          <img src="${sessionScope.header}">
 		        </a>
 		        <dl class="layui-nav-child">
-		          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-		          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-		          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+		          <dd><a href="${PATH}/member/toSetMyInfoPage/${sessionScope.ident}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+		          <dd><a href="../user/message.html"><i class="layui-icon layui-icon-star" style="top: 4px;"></i>我的收藏</a></dd>
+		          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe657;</i>我的购买</a></dd>
 		          <hr style="margin: 5px 0;">
-		          <dd><a href="" style="text-align: center;">退出</a></dd>
+		          <dd><a href="${PATH}/member/loginOut" style="text-align: center;">退出</a></dd>
 		        </dl>
 		      </li>
 		</c:when>
@@ -75,12 +75,12 @@
       <li><a href="">公告</a></li> 
       <li><a href="">动态</a></li>  -->
       
-      <c:if test="${not empty sessionScope.name}">
+      <%-- <c:if test="${not empty sessionScope.name}">
       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
 	      <!-- 用户登入后显示 -->
 	      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html">我发表的贴</a></li> 
 	      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index.html#collection">我收藏的贴</a></li> 
-      </c:if>
+      </c:if> --%>
     </ul> 
     
   </div>
