@@ -31,6 +31,7 @@ import com.kpp.member.beans.Member;
 import com.kpp.member.service.MemberService;
 import com.kpp.utils.AnalysisKeyWordsListUtils;
 import com.kpp.utils.ConstantUtils;
+import com.kpp.utils.EmailUntils;
 import com.kpp.utils.Msg;
 import com.kpp.utils.UUIDUtil;
 import com.kpp.utils.UploadFileUtil;
@@ -54,14 +55,35 @@ public class MemberController {
 	private RegiterCodeService regiterCodeSer;	//验证码
 	
 	/**
+	 * 通过ident查询
+	 * */
+	@RequestMapping(value="/getByMemIdent/{ident}",produces = "text/html; charset=utf-8")
+	@ResponseBody
+	public String getByMemIdent(@PathVariable("ident")String ident) {
+		Member member = memSer.selectOne(new EntityWrapper<Member>().eq("m_ident", ident));
+		String info = "该客户的邮箱为："+member.getmEmail()
+		+"<hr>签名为："+member.getmAutograph()
+		+"<hr>当前积分为："+member.getmIntegral()
+		+"<hr>账号状态为："+member.getmState();
+		return info;
+	}
+	
+	/**
 	 * 批量拉黑
 	 * */
 	@RequestMapping(value="/exceptionCustByIds",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg exceptionCustByIds(@RequestBody ArrayList<Integer> list) {
 		List<Member> selectBatchIds = memSer.selectBatchIds(list);
-		//Java 8 新特性+Lambda表达式
-		selectBatchIds.forEach(cust -> cust.setmState("异常"));
+		for (Member member : selectBatchIds) {
+			member.setmState("异常");
+			EmailUntils emailUtils = new EmailUntils();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+		    String format = sdf.format(date);       //将Date类型转换成String类型  
+			String text =  "您的账号经后台在"+format+"检测出现异常！您将无法登录！如有疑问，联系我。";
+			emailUtils.sendEmailToCooper(member.getmEmail(),text);
+		}
 		boolean b = memSer.updateBatchById(selectBatchIds);
 		if(!b) {
 			return Msg.fail().add("msg","失败！");
@@ -75,8 +97,15 @@ public class MemberController {
 	@ResponseBody
 	public Msg recoveryCustByIds(@RequestBody ArrayList<Integer> list) {
 		List<Member> selectBatchIds = memSer.selectBatchIds(list);
-		//Java 8 新特性+Lambda表达式
-		selectBatchIds.forEach(cust -> cust.setmState("正常"));
+		for (Member member : selectBatchIds) {
+			member.setmState("正常");
+			EmailUntils emailUtils = new EmailUntils();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+		    String format = sdf.format(date);       //将Date类型转换成String类型  
+			String text =  "您的账号经后台在"+format+"检测，已经为您恢复，给您带来不便深感抱歉！如有疑问，联系我。";
+			emailUtils.sendEmailToCooper(member.getmEmail(),text);
+		}
 		boolean b = memSer.updateBatchById(selectBatchIds);
 		if(!b) {
 			return Msg.fail().add("msg","失败！");
@@ -118,7 +147,7 @@ public class MemberController {
 		EntityWrapper<Member> wrapper = new EntityWrapper<>();
 		DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		if(!name.equals("")) {
-			wrapper.like("m_nick", name).or().like("m_autograph", name);
+			wrapper.like("m_nick", name).or().like("m_autograph", name).or().like("m_ident", name);
 		}
 		if(!email.equals("")) {
 			wrapper.eq("m_email", email);
@@ -159,7 +188,7 @@ public class MemberController {
 		EntityWrapper<Member> wrapper = new EntityWrapper<>();
 		DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		if(!name.equals("")) {
-			wrapper.like("m_nick", name).or().like("m_autograph", name);
+			wrapper.like("m_nick", name).or().like("m_autograph", name).or().like("m_ident", name);
 		}
 		if(!email.equals("")) {
 			wrapper.eq("m_email", email);

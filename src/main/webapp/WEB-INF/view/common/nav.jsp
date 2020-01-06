@@ -12,20 +12,19 @@
           	<dd><a href="${PATH}/member/toAbnormalMemPage">异常顾客</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item">
+        <!-- <li class="layui-nav-item">
           <a href="javascript:;">会员管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">列表一</a></dd>
             <dd><a href="javascript:;">列表二</a></dd>
             <dd><a href="">超链接</a></dd>
           </dl>
-        </li>
+        </li> -->
         <li class="layui-nav-item">
           <a href="javascript:;">积分日志</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="${PATH}/integralRecharge/toNormalPage">正常充值</a></dd>
+            <dd><a href="${PATH}/integralRecharge/toAbnormalPage">异常充值</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -39,9 +38,9 @@
         <li class="layui-nav-item">
           <a href="javascript:;">博客管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="${PATH}/blog/toWritePage">编写博客</a></dd>
+            <dd><a href="${PATH}/blog/toShowPage">展示的博客</a></dd>
+            <dd><a href="${PATH}/blog/toHidePage">隐藏的博客</a></dd>
           </dl>
         </li>
       </ul>

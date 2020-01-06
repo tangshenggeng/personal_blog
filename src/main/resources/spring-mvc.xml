@@ -31,6 +31,17 @@
 
 	<!-- 支持mvc更高级的功能，JSR303校验，快捷ajax...映射动态请求-->
 	<!-- 响应的乱码 -->
-	<mvc:annotation-driven/>
+	 <!-- 处理请求返回json字符串的乱码问题 -->  
+     <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 	
 </beans>

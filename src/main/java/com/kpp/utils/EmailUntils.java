@@ -50,7 +50,39 @@ public class EmailUntils {
             return false;
         } 
     }
-   
+    /**
+     * 邮件发送工具类(单个)
+     * 
+     * */
+    public boolean sendEmailToCooper(String receive ,String text) {
+    	try {
+    		HtmlEmail email = new HtmlEmail();
+    		// 配置信息
+    		email.setHostName(hostName);
+    		email.setFrom(senderEmail,senderNick);
+    		email.setAuthentication(senderEmail,userInfo);
+    		email.setCharset(chartset);
+    		email.setSubject(emailSubject);
+    		email.setHtmlMsg(text);
+    		// 收件人
+    		if (null != receive) {
+    			email.addTo(receive);
+    		}
+    		//发送
+    		try {
+    			email.send();
+    			return true;
+    		} catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    			return false;
+    		}
+    		
+    	} catch (EmailException e) {
+    		e.printStackTrace();
+    		return false;
+    	} 
+    }
    
 }
 

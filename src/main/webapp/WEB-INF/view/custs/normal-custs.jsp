@@ -8,7 +8,7 @@
   %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>健丽宝后台</title>
+  <title>KPP个人博客后台</title>
   <link rel="stylesheet" href="${PATH}/static/layui/css/layui.css">
   <!--[if lt IE 9]>
   <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>

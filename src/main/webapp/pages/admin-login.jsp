@@ -60,7 +60,7 @@
 
 <script src="${PATH}/static/layui/layui.all.js"></script>
 <script>
-var error = "${error}"
+var error = "${msg}"
 if(error!=""){
 	layui.layer.msg(error,{icon:5});
 }	
