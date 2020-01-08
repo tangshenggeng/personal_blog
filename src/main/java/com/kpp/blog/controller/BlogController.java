@@ -12,6 +12,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +50,80 @@ public class BlogController {
 	
 	@Autowired
 	private BlogService blogSer;
+	
+	/**
+	 * 通过ident查看博客（后台）
+	 * */
+	@RequestMapping("/getBlogByIdentAdmin/{ident}")
+	@ResponseBody
+	public Blog getBlogByIdentAdmin(@PathVariable("ident")String ident) {
+		Blog blog = blogSer.selectOne(new EntityWrapper<Blog>().eq("blog_ident", ident));
+		return blog;
+	}
+	/**
+	 * 热议
+	 * @return 
+	 * */
+	@RequestMapping("/getDiscussions")
+	@ResponseBody
+	public List<Blog> getDiscussions() {
+		EntityWrapper<Blog> wrapper = new EntityWrapper<>();
+		String sql = "blog_ident AS blogIdent, blog_title AS blogTitle,commet_num AS commetNum";
+		wrapper.setSqlSelect(sql).eq("blog_state", "展示").orderBy("commet_num", false).orderBy("blog_id",false).last("LIMIT 4");
+		List<Blog> list = blogSer.selectList(wrapper);
+		return list;
+	}
+	
+	/**
+	 * 查看免费的博客
+	 * */
+	@RequestMapping("/getBlogByIdent/{ident}")
+	public String getBlogByIdent(@PathVariable("ident")String ident,Model model) {
+		EntityWrapper<Blog> wrapper = new EntityWrapper<>();
+		String sql = "blog_id AS blogId,blog_ident AS blogIdent, blog_title AS blogTitle,blog_label AS blogLabel,blog_text AS blogText,blog_look AS blogLook,need_integral AS needIntegral,commet_num AS commetNum,create_time AS createTime";
+		wrapper.setSqlSelect(sql).eq("blog_ident", ident);
+		Blog blog = blogSer.selectOne(wrapper);
+		Date time = blog.getCreateTime();
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+		String createTime = ft.format(time);
+		blog.setFilepath(createTime);
+		blog.setBlogLook(blog.getBlogLook()+1);
+		boolean b = blogSer.updateById(blog);
+		model.addAttribute("blog", blog);
+		return "forward:/pages/blog/detail.jsp";
+	}
+	
+	
+	/**
+	 * 首页得到所有的博客
+	 * @return 
+	 * */
+	@RequestMapping(value="/getBlogListIndex",method=RequestMethod.POST)
+	@ResponseBody
+	public Page<Map<String, Object>> getBlogListIndex(@RequestBody HashMap<String, Object> map) {
+		Integer page = (Integer) map.get("page");
+		String condition = (String) map.get("condition");
+		String keyword = (String) map.get("keyword");
+		String ident = (String) map.get("ident");
+		int limit = 8;
+		EntityWrapper<Blog> wrapper = new EntityWrapper<>();
+		String sqlSelect="blog_ident AS blogIdent,blog_title AS blogTitle,need_integral AS needIntegral,commet_num AS commetNum,create_time AS createTime";
+		wrapper.setSqlSelect(sqlSelect);
+		if(condition.equals("commet")) {
+			wrapper.orderBy("commet_num", false);
+		}else{
+			wrapper.orderBy("blog_id", false);
+		}
+		if(!ident.equals("all")) {
+			wrapper.like("blog_label", ident);
+		}
+		if(!(keyword.equals("all")||keyword.equals(""))) {
+			wrapper.like("blog_title", keyword);
+		}
+		wrapper.eq("blog_state", "展示");
+		Page<Map<String, Object>> blogsWhitPage = blogSer.selectMapsPage(new Page<Blog>(page, limit), wrapper);
+		return blogsWhitPage;
+	}
 	
 	/**
 	 *根据id修改

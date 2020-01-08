@@ -37,12 +37,12 @@
         基本设置
       </a>
     </li>
-    <li class="layui-nav-item">
+    <!-- <li class="layui-nav-item">
       <a href="message.html">
         <i class="iconfont icon-renzheng layui-hide-xs" title="加入会员"></i>
         加入会员
       </a>
-    </li>
+    </li> -->
   </ul>
 
   <div class="site-tree-mobile layui-hide">

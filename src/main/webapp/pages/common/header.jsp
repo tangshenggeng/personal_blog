@@ -15,9 +15,9 @@
       <li class="layui-nav-item">
         <a href="${PATH}/pages/admin-login.jsp"><i class="iconfont icon-iconmingxinganli"></i>进入后台</a>
       </li>
-     	<!--  <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li> -->
+     	<li class="layui-nav-item">
+        <a href="${PATH}/pages/contact.jsp" target="_blank"><i class="layui-icon layui-icon-chat"></i>联系我们</a>
+      </li> 
     </ul>
     
     <ul class="layui-nav fly-nav-user">
@@ -32,8 +32,8 @@
 		        </a>
 		        <dl class="layui-nav-child">
 		          <dd><a href="${PATH}/member/toSetMyInfoPage/${sessionScope.ident}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-		          <dd><a href="../user/message.html"><i class="layui-icon layui-icon-star" style="top: 4px;"></i>我的收藏</a></dd>
-		          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe657;</i>我的购买</a></dd>
+		          <dd><a href="${PATH}/member/toMyCollectBlogPage/${sessionScope.ident}"><i class="layui-icon layui-icon-star" style="top: 4px;"></i>我的收藏</a></dd>
+		          <dd><a href="${PATH}/member/toMyBuyBlogPage/${sessionScope.ident}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe657;</i>我的购买</a></dd>
 		          <hr style="margin: 5px 0;">
 		          <dd><a href="${PATH}/member/loginOut" style="text-align: center;">退出</a></dd>
 		        </dl>

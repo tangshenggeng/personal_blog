@@ -511,6 +511,28 @@ public class MemberController {
 	public String toAbnormalCustPage() {
 		return "/custs/abnormal-custs";
 	}
+	//我的收藏
+	@RequestMapping("/toMyCollectBlogPage/{ident}")
+	public String toMyCollectBlogPage(@PathVariable("ident")String ident,Model model) {
+		Member member = getByIdent(ident);
+		if(member==null) {
+			model.addAttribute("msg", "未找到您的信息");
+			return "forward:/pages/member/my-collections.jsp";
+		}
+		model.addAttribute("ident", member.getmIdent());
+		return "forward:/pages/member/my-collections.jsp";
+	}
+	//我的收藏
+	@RequestMapping("/toMyBuyBlogPage/{ident}")
+	public String toMyBuyBlogPage(@PathVariable("ident")String ident,Model model) {
+		Member member = getByIdent(ident);
+		if(member==null) {
+			model.addAttribute("msg", "未找到您的信息");
+			return "forward:/pages/member/my-collections.jsp";
+		}
+		model.addAttribute("ident", member.getmIdent());
+		return "forward:/pages/member/my-buy.jsp";
+	}
 	
 }
 

@@ -28,11 +28,10 @@
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">评论管理</a>
+          <a href="javascript:;">评论及购买记录</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
+            <dd><a href="${PATH}/comment/toCommentsPage">评论管理</a></dd>
+            <dd><a href="${PATH}/blogBuy/toBlogsBuyPage">购买记录</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">

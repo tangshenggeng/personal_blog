@@ -18,6 +18,10 @@ public class ConstantUtils {
 	 * 文章视频保存的路径
 	 */
 	public static final String BLOG_FILE = "D:\\graduation\\personal_blog\\blog\\files";
+	/**
+	 * 评论图片保存路径
+	 */
+	public static final String COMMENT_IMG = "D:\\graduation\\personal_blog\\comment\\imgs";
 	
 	
 }

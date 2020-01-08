@@ -156,9 +156,12 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
               //执行上传实例
               upload.render({
                 elem: '#uploadImg'
-                ,url: '/api/upload/'
-                ,size: 200
+                ,url: '/personal_blog/comment/uploadImg'
+                ,accept:"images"
+                ,acceptMime:'image/*'
+                ,size: 1024
                 ,done: function(res){
+                console.log(res)
                   if(res.status == 0){
                     image.val(res.url);
                   } else {
@@ -213,11 +216,10 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
         }
         ,yulan: function(editor){ //预览
           var content = editor.val();
-          
           content = /^\{html\}/.test(content) 
             ? content.replace(/^\{html\}/, '')
           : fly.content(content);
-
+            console.log(content)
           layer.open({
             type: 1
             ,title: '预览'
